@@ -5,23 +5,35 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function CreatePage(){
+    const route = useRouter()
     const [name, setName] = useState<string>('')
-    const [disciplina, setDisciplina] = useState<string>('')
-    const [descricao, setDescricao] = useState<string>('')
-    const [aluno, setAluno] = useState<string>('')
+    const [course, setCoures] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+    const [owner, setOwner] = useState<string>('')
     const [whatsapp, setWhatsapp] = useState<string>('')
 
-    const createGroup = () => {
+    const createGroup = async () => {
         const data = {
             name,
-            disciplina,
-            descricao,
-            aluno, whatsapp
+            course,
+            description,
+            owner, whatsapp
         }
-        console.log('dados: ', data)
+        const response = await fetch('https://68233ff365ba05803395f428.mockapi.io/api/v1/group',{
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+
+        const responseData = await response.json()
+
+
+        if(responseData !== null){
+            route.push('/')
+        }
     }
     return(
         <div className="flex w-full flex-col items-center justify-center">
@@ -39,15 +51,15 @@ export default function CreatePage(){
                     </div>
                     <div>
                         <Label className="text-lg">Disciplina</Label>
-                        <Input placeholder="Nome do grupo" value={disciplina} onChange={(e) => setDisciplina(e.target.value)}/>
+                        <Input placeholder="Nome do grupo" value={course} onChange={(e) => setCoures(e.target.value)}/>
                     </div>
                     <div>
                         <Label className="text-lg">Descrição</Label>
-                        <Input placeholder="Nome do grupo" value={descricao} onChange={(e) => setDescricao(e.target.value)}/>
+                        <Input placeholder="Nome do grupo" value={description} onChange={(e) => setDescription(e.target.value)}/>
                     </div>
                     <div>
                         <Label className="text-lg">Aluno</Label>
-                        <Input placeholder="Nome do grupo" value={aluno} onChange={(e) => setAluno(e.target.value)}/>
+                        <Input placeholder="Nome do grupo" value={owner} onChange={(e) => setOwner(e.target.value)}/>
                     </div>
                     <div>
                         <Label className="text-lg">Whatsapp</Label>

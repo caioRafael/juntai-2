@@ -1,4 +1,4 @@
-import { CardGroup } from "@/components/card-group";
+import { ListGroups } from "@/components/list-groups";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -17,13 +17,7 @@ projetos universitários.</p>
       </section>
       <section className="w-full flex flex-col gap-4 items-center justify-center">
         <h1 className="font-bold text-2xl text-emerald-600">Grupos</h1>
-        <div className="flex flex-row flex-wrap w-5/6 gap-6">
-          <CardGroup/>         
-          <CardGroup/>  
-          <CardGroup/>  
-          <CardGroup/>  
-          <CardGroup/>  
-        </div>
+        <ListGroups/>
       </section>
     </div>
   );

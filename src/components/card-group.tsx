@@ -1,23 +1,30 @@
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
+import Group from "@/interfaces/group";
 
-export function CardGroup(){
+interface CardGroupProps {
+    group: Group
+}
+
+export function CardGroup({group}: CardGroupProps){
     return(
         <Card className="w-[300px]">
             <CardHeader>
               <CardTitle>
-                Grupo de estudos 1
+                {group.name}
               </CardTitle>
               <CardDescription>
-                Este é um otimo grupo de estudos
+                {group.owner}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut, exercitationem.
+                <p>
+                    {group.descrption}
+                </p>
             </CardContent>
             <CardFooter>
-              <Link href={'/'}>
+              <Link href={`/${group.id}`}>
                 <Button className="bg-emerald-600 text-white">
                   Ver grupo
                 </Button>
