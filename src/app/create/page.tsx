@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { CreateGroup } from "./actions"
 
 export default function CreatePage(){
     const route = useRouter()
@@ -23,13 +24,8 @@ export default function CreatePage(){
             description,
             owner, whatsapp
         }
-        const response = await fetch('https://68233ff365ba05803395f428.mockapi.io/api/v1/group',{
-            method: 'POST',
-            body: JSON.stringify(data)
-        })
 
-        const responseData = await response.json()
-
+        const responseData = await CreateGroup(data)
 
         if(responseData !== null){
             route.push('/')
